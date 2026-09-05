@@ -5,10 +5,6 @@
   <a href="https://aidaslab.github.io/Post-Compression-Adjustment/"><img src="https://img.shields.io/badge/Project-Page-blue.svg" alt="Project Page"></a>
 </p>
 
-Official code release for **“Beyond Retraining-Free MoE Compression: A Cost-Normalized Study of Post-Compression Adjustment”** (EMNLP 2026).
-
-Each backbone keeps its original compression, C4 post-compression adjustment, and math-domain robustness directories; the original launch scripts remain the experiment entry points.
-
 ## Abstract
 Retraining-free MoE compression reduces deployment memory by pruning or merging experts, but often treats the compressed checkpoint as the final artifact. We argue that this view is incomplete: compressed MoE checkpoints are better understood as compressed initializations that benefit from a tiny post-compression adjustment stage. Across two MoE LLM backbones, four pruning/merging methods, three expert-retention ratios, and 28 benchmarks, we compare LM fine-tuning and teacher-based KD under matched small-data budgets and measured GPU costs. Using only 3,000 C4 examples and a single epoch of adjustment, Full FT recovers 37.3% of the original-to-compressed performance gap on average. Moreover, LM fine-tuning is more cost-effective than standard token-level KD, and full-parameter adjustment gives the strongest cost--recovery trade-off among the tested scopes. These results suggest that retraining-free compression should be paired with small post-compression adjustment to recover a substantial portion of the performance lost during compression.
 
