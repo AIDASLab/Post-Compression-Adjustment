@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the EMNLP 2026 paper."
+title: "Beyond Retraining-Free MoE Compression: A Cost-Normalized Study of Post-Compression Adjustment"
+type: software
+license: Apache-2.0
+authors:
+  - family-names: Hyeon
+    given-names: Sieun
+  - family-names: Do
+    given-names: Jaeyoung
+date-released: 2026-09-02
+repository-code: "https://github.com/AIDASLab/Post-Compression-Adjustment"
+preferred-citation:
+  type: conference-paper
+  title: "Beyond Retraining-Free MoE Compression: A Cost-Normalized Study of Post-Compression Adjustment"
+  authors:
+    - family-names: Hyeon
+      given-names: Sieun
+    - family-names: Do
+      given-names: Jaeyoung
+  conference:
+    name: "Conference on Empirical Methods in Natural Language Processing"
+  year: 2026

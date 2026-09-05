@@ -1,0 +1,60 @@
+{
+  "original": [
+    {
+      "ratio": "original",
+      "variant": "base",
+      "name": "Qwen3-30B-A3B-Instruct-2507",
+      "model_ref": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "ref_type": "hf_id"
+    }
+  ],
+  "HC-SMoE": [
+    {
+      "ratio": "ratio_50",
+      "variant": "compressed_only",
+      "name": "qwen3-30b-a3b-hcsmoe-50p-64e",
+      "model_ref": "HC-SMoE/qwen3-30b-a3b-hcsmoe-50p-64e",
+      "ref_type": "local_path",
+      "mirror_python": true
+    },
+    {
+      "ratio": "ratio_625",
+      "variant": "compressed_only",
+      "name": "qwen3-30b-a3b-hcsmoe-625p-80e",
+      "model_ref": "HC-SMoE/qwen3-30b-a3b-hcsmoe-625p-80e",
+      "ref_type": "local_path",
+      "mirror_python": true
+    },
+    {
+      "ratio": "ratio_75",
+      "variant": "compressed_only",
+      "name": "qwen3-30b-a3b-hcsmoe-75p-96e",
+      "model_ref": "HC-SMoE/qwen3-30b-a3b-hcsmoe-75p-96e",
+      "ref_type": "local_path",
+      "mirror_python": true
+    }
+  ],
+  "REAP": [
+    {
+      "ratio": "ratio_50",
+      "variant": "compressed_only",
+      "name": "reap-renorm_true-seed_42-0.5",
+      "model_ref": "REAP/artifacts/Qwen3-30B-A3B-Instruct-2507/c4/pruned_models/reap-renorm_true-seed_42-0.5",
+      "ref_type": "local_path"
+    },
+    {
+      "ratio": "ratio_625",
+      "variant": "compressed_only",
+      "name": "reap-renorm_true-seed_42-0.375",
+      "model_ref": "REAP/artifacts/Qwen3-30B-A3B-Instruct-2507/c4/pruned_models/reap-renorm_true-seed_42-0.375",
+      "ref_type": "local_path"
+    },
+    {
+      "ratio": "ratio_75",
+      "variant": "compressed_only",
+      "name": "reap-renorm_true-seed_42-0.25",
+      "model_ref": "REAP/artifacts/Qwen3-30B-A3B-Instruct-2507/c4/pruned_models/reap-renorm_true-seed_42-0.25",
+      "ref_type": "local_path"
+    }
+  ]
+}

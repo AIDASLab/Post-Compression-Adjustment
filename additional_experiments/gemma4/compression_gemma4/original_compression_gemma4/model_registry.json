@@ -1,0 +1,60 @@
+{
+  "original": [
+    {
+      "ratio": "original",
+      "variant": "base",
+      "name": "gemma-4-26B-A4B-it",
+      "model_ref": "google/gemma-4-26B-A4B-it",
+      "ref_type": "hf_id"
+    }
+  ],
+  "AIMER": [
+    {
+      "ratio": "ratio_50",
+      "variant": "compressed_only",
+      "name": "gemma4_aimer_keep50",
+      "model_ref": "AIMER/gemma4_aimer_keep50",
+      "ref_type": "local_path"
+    },
+    {
+      "ratio": "ratio_625",
+      "variant": "compressed_only",
+      "name": "gemma4_aimer_keep62_5",
+      "model_ref": "AIMER/gemma4_aimer_keep62_5",
+      "ref_type": "local_path"
+    },
+    {
+      "ratio": "ratio_75",
+      "variant": "compressed_only",
+      "name": "gemma4_aimer_keep75",
+      "model_ref": "AIMER/gemma4_aimer_keep75",
+      "ref_type": "local_path"
+    }
+  ],
+  "MC-SMoE": [
+    {
+      "ratio": "ratio_50",
+      "variant": "compressed_only",
+      "name": "gemma4-26b-a4b-it-mcsmoe-50",
+      "model_ref": "MC-SMoE/gemma4-26b-a4b-it-mcsmoe-50",
+      "ref_type": "local_path",
+      "mirror_python": true
+    },
+    {
+      "ratio": "ratio_625",
+      "variant": "compressed_only",
+      "name": "gemma4-26b-a4b-it-mcsmoe-62_5",
+      "model_ref": "MC-SMoE/gemma4-26b-a4b-it-mcsmoe-62_5",
+      "ref_type": "local_path",
+      "mirror_python": true
+    },
+    {
+      "ratio": "ratio_75",
+      "variant": "compressed_only",
+      "name": "gemma4-26b-a4b-it-mcsmoe-75",
+      "model_ref": "MC-SMoE/gemma4-26b-a4b-it-mcsmoe-75",
+      "ref_type": "local_path",
+      "mirror_python": true
+    }
+  ]
+}
