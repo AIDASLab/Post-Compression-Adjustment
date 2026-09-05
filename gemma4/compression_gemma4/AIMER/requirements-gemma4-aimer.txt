@@ -1,0 +1,7 @@
+accelerate>=1.11.0
+huggingface_hub>=0.36.0
+pillow>=10.0.0
+protobuf>=5.0.0
+safetensors>=0.5.3
+sentencepiece>=0.2.0
+transformers>=5.5.2
