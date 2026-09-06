@@ -35,10 +35,7 @@ backbones and their compressor pairs are:
 | Qwen3-30B-A3B-Instruct-2507 | REAP | HC-SMoE |
 | gemma-4-26B-A4B-it | AIMER | M-SMoE |
 
-The Gemma merging implementation remains in its historical `MC-SMoE`
-directory so that paths used by the original experiments are not rewritten.
-The camera-ready experiments use the M-SMoE expert-merging stage implemented in
-that directory; no additional low-rank MC-SMoE stage is applied.
+
 
 ## Experiment flow
 
