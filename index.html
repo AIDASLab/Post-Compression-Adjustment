@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Official project page for Beyond Retraining-Free MoE Compression: A Cost-Normalized Study of Post-Compression Adjustment. EMNLP 2026 Main Conference.">
+  <meta name="keywords" content="Post-Compression Adjustment, PCA, Mixture-of-Experts, MoE Compression, Fine-tuning, Knowledge Distillation, EMNLP 2026">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="citation_title" content="Beyond Retraining-Free MoE Compression: A Cost-Normalized Study of Post-Compression Adjustment">
+  <meta name="citation_author" content="Hyeon, Sieun">
+  <meta name="citation_author" content="Do, Jaeyoung">
+  <meta name="citation_conference_title" content="EMNLP 2026">
+  <meta name="citation_year" content="2026">
+  <title>Beyond Retraining-Free MoE Compression | EMNLP 2026</title>
+
+  <!-- Original AIDAS template fonts and base styles. -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/paper.css">
+  <link rel="icon" href="./static/images/favicon.ico">
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script defer src="./static/js/paper.js"></script>
+  <script defer src="./static/js/scope.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#abstract">Skip to content</a>
+
+<!-- Navbar: original Bulma template structure. -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item mobile-lab-link" href="https://aidas.snu.ac.kr">AIDAS Lab</a>
+    <button class="navbar-burger" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="navbar-menu" id="site-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="https://aidas.snu.ac.kr">
+        <span class="icon"><i class="fas fa-home" aria-hidden="true"></i></span>
+        <span class="lab-label">AIDAS Lab</span>
+      </a>
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#method">PCA</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#scope">Trainable Scope</a>
+      <a class="navbar-item" href="#robustness">Robustness</a>
+      <a class="navbar-item" href="#BibTeX">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Paper title, conference, authors and resource buttons follow the template. -->
+<section class="hero publication-header">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            Beyond Retraining-Free MoE Compression:<br>
+            A Cost-Normalized Study of <span class="title-word">Post-Compression</span> Adjustment
+          </h1>
+          <p class="title is-4 publication-title conference-name">EMNLP 2026 · Main Conference</p>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="mailto:zxc2692@snu.ac.kr">Sieun Hyeon</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="mailto:jaeyoung.do@snu.ac.kr">Jaeyoung Do</a><sup>1,2</sup></span>
+          </div>
+          <div class="publication-authors affiliation-list">
+            <span class="author-block"><sup>1</sup> Department of Electrical and Computer Engineering, Seoul National University</span><br>
+            <span class="author-block"><sup>2</sup> Interdisciplinary Program in Artificial Intelligence, Seoul National University</span>
+          </div>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="./static/paper/paper.pdf" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
+                  <span class="icon"><i class="fas fa-file-pdf" aria-hidden="true"></i></span><span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2609.0000000" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener" title="Placeholder — arXiv upload forthcoming">
+                  <span class="icon"><i class="fas fa-file-alt" aria-hidden="true"></i></span><span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/AIDASLab/Post-Compression-Adjustment" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
+                  <span class="icon"><i class="fab fa-github" aria-hidden="true"></i></span><span>Code</span>
+                </a>
+              </span>
+            </div>
+            <p class="resource-note">arXiv link will be updated after upload.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaser: motivate PCA in the original template slot. -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="pca-takeaway">
+        <p class="takeaway-label">Post-Compression Adjustment (PCA)</p>
+        <h2 class="subtitle has-text-centered">
+          Retraining-free compression is a strong start.<br>
+          <strong>A small post-compression adjustment is an important recovery stage.</strong>
+        </h2>
+        <p>A compressed checkpoint is an initialization for further recovery. Design the compression and adjustment stages together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+<!-- Abstract: native disclosure within the template's light section. -->
+<section class="hero is-light abstract-section" id="abstract">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <details class="abstract-disclosure" id="abstract-details">
+            <summary>
+              <h2 class="title is-3">Abstract</h2>
+              <span class="abstract-toggle-hint" aria-hidden="true">
+                <span class="abstract-show">Read abstract</span>
+                <span class="abstract-hide">Hide abstract</span>
+                <span class="abstract-chevron"></span>
+              </span>
+            </summary>
+          <div class="content has-text-justified abstract-text">
+            <p>
+              Retraining-free MoE compression reduces deployment memory by pruning or merging experts,
+              but often treats the compressed checkpoint as the final artifact. We argue that this view
+              is incomplete: compressed MoE checkpoints are better understood as compressed initializations
+              that benefit from a small <strong>post-compression adjustment</strong> stage.
+            </p>
+            <p>
+              We study this stage under a small general-domain data budget, comparing causal language
+              modeling fine-tuning and teacher-based knowledge distillation across different trainable
+              parameter scopes. By considering performance recovery alongside measured GPU costs, we
+              examine how the adjustment objective and scope affect the compressed model. The study
+              motivates a practical two-stage view: retraining-free compression followed by a short
+              recovery stage, with both stages considered when designing the final pipeline.
+            </p>
+          </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Method: standard academic section, in the original centered column. -->
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Post-Compression Adjustment</h2>
+        <div class="content has-text-justified">
+          <p>
+            Expert pruning and merging change the available expert paths and, for merging, the functions
+            implemented by the experts. The resulting mismatch can involve both router reweighting and
+            expert/path errors. These perturbations can also propagate through subsequent attention,
+            normalization, and shared components.
+          </p>
+          <p>
+            <strong>PCA applies short gradient updates to an already-compressed checkpoint</strong>
+            using a small amount of general-domain text. Our study compares adjustment choices on the
+            same compressed checkpoints under matched data budgets and measured GPU costs.
+          </p>
+        </div>
+        <div class="columns method-columns">
+          <div class="column is-half">
+            <div class="method-detail">
+              <h3 class="title is-5">Which training objective?</h3>
+              <p>Causal LM fine-tuning learns from observed next tokens. Token-level knowledge distillation
+                matches the output distribution of the original, uncompressed teacher.</p>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="method-detail">
+              <h3 class="title is-5">Which trainable parameters?</h3>
+              <p>We compare router-only updates, router + selected experts, router + all experts, and full-parameter
+                updates that also allow shared model components to change.</p>
+            </div>
+          </div>
+        </div>
+        <div class="protocol-note">
+          <strong>Matched adjustment protocol.</strong>
+          The main experiments use 3,000 C4 examples, one epoch, and two NVIDIA H200 GPUs.
+          Expert-selection and online-teacher passes are included in the measured adjustment cost when applicable.
+          <a href="./static/paper/paper.pdf#page=5" target="_blank" rel="noopener">Experimental setup in the paper ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experimental results begin with scope exploration and two complementary paper figures. -->
+<section class="section section-divider" id="results">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Experimental Results</h2>
+        <section id="scope" aria-labelledby="scope-title">
+          <h3 class="title is-4 result-subtitle" id="scope-title">Effect of Trainable Parameter Scope</h3>
+          <div class="content has-text-justified">
+            <p>
+              How much of the compressed model should be allowed to change? We expand the trainable scope
+              from <strong>router-only</strong>, to <strong>router + selected experts</strong>
+              (top-8, top-16, or top-50 per layer), to <strong>router + all experts</strong>, and finally
+              to <strong>all model parameters</strong>. Select a scope to see which components are updated
+              and compare the mean recovery from causal LM fine-tuning and token-level KD.
+            </p>
+          </div>
+          <div class="scope-explorer" data-scope-explorer data-active-scope="router" role="region" aria-labelledby="scope-explorer-title">
+            <div class="scope-explorer-heading">
+              <h4 id="scope-explorer-title" class="title is-5">Explore the trainable scope</h4>
+              <p>Choose which parts of the compressed model can change during adjustment.</p>
+            </div>
+            <div class="scope-layout">
+              <div class="scope-controls" role="group" aria-label="Trainable parameter scope">
+                <button class="scope-choice is-active" type="button" data-scope="router" aria-pressed="true">
+                  <span class="scope-choice-number" aria-hidden="true">01</span><span>Router only</span>
+                </button>
+                <button class="scope-choice" type="button" data-scope="top8" aria-pressed="false">
+                  <span class="scope-choice-number" aria-hidden="true">02</span><span>Router + top-8 experts</span>
+                </button>
+                <button class="scope-choice" type="button" data-scope="top16" aria-pressed="false">
+                  <span class="scope-choice-number" aria-hidden="true">03</span><span>Router + top-16 experts</span>
+                </button>
+                <button class="scope-choice" type="button" data-scope="top50" aria-pressed="false">
+                  <span class="scope-choice-number" aria-hidden="true">04</span><span>Router + top-50 experts</span>
+                </button>
+                <button class="scope-choice" type="button" data-scope="experts" aria-pressed="false">
+                  <span class="scope-choice-number" aria-hidden="true">05</span><span>Router + all experts</span>
+                </button>
+                <button class="scope-choice" type="button" data-scope="full" aria-pressed="false">
+                  <span class="scope-choice-number" aria-hidden="true">06</span><span>Full parameter</span>
+                </button>
+              </div>
+              <div class="scope-panel">
+                <div class="scope-legend" aria-label="Diagram legend">
+                  <span class="scope-key"><span class="scope-key-swatch scope-trainable" aria-hidden="true"></span>Trainable</span>
+                  <span class="scope-key"><span class="scope-key-swatch" aria-hidden="true"></span>Frozen</span>
+                </div>
+                <div class="scope-schematic" data-scope="router" role="group" aria-label="Conceptual compressed MoE model">
+                  <div class="scope-input">Hidden states</div>
+                  <div class="scope-connector" aria-hidden="true"></div>
+                  <div class="scope-module scope-shared">
+                    <span>Attention &amp; shared transformations</span><span class="scope-state">Frozen</span>
+                  </div>
+                  <div class="scope-connector" aria-hidden="true"></div>
+                  <div class="scope-moe">
+                    <div class="scope-moe-label">Compressed MoE layer</div>
+                    <div class="scope-module scope-router scope-trainable">
+                      <span>Router</span><span class="scope-state">Trainable</span>
+                    </div>
+                    <div class="scope-branches" aria-hidden="true"></div>
+                    <div class="scope-experts" role="img" aria-label="All retained experts are frozen; expert icons are symbolic.">
+                      <span class="scope-expert" aria-hidden="true">E</span>
+                      <span class="scope-expert" aria-hidden="true">E</span>
+                      <span class="scope-expert" aria-hidden="true">E</span>
+                      <span class="scope-expert" aria-hidden="true">E</span>
+                      <span class="scope-expert" aria-hidden="true">E</span>
+                      <span class="scope-expert" aria-hidden="true">E</span>
+                      <span class="scope-expert" aria-hidden="true">E</span>
+                      <span class="scope-expert" aria-hidden="true">E</span>
+                    </div>
+                    <p class="scope-experts-status">All retained experts frozen</p>
+                  </div>
+                  <div class="scope-connector" aria-hidden="true"></div>
+                  <div class="scope-module scope-shared">
+                    <span>Downstream &amp; shared parameters</span><span class="scope-state">Frozen</span>
+                  </div>
+                </div>
+                <p class="scope-caption">Conceptual view. Expert icons do not represent an exact count or proportion. Top-k experts are selected per layer before adjustment.</p>
+              </div>
+              <aside class="scope-performance" aria-labelledby="scope-performance-title">
+                <h4 class="scope-performance-title" id="scope-performance-title">Mean recovery gain</h4>
+                <p class="scope-performance-baseline">Over the compressed baseline</p>
+                <div class="scope-performance-values" aria-live="polite" aria-atomic="true">
+                  <p class="scope-performance-selection">Router only</p>
+                  <div class="scope-result scope-result-ft">
+                    <span class="scope-objective">LM fine-tuning (FT)</span>
+                    <p class="scope-gain"><strong id="scope-ft">+0.23</strong> <span>pp</span></p>
+                    <div class="scope-meter" aria-hidden="true"><span id="scope-ft-bar" style="width: 6.57%"></span></div>
+                  </div>
+                  <div class="scope-result scope-result-kd">
+                    <span class="scope-objective">Token-level KD</span>
+                    <p class="scope-gain"><strong id="scope-kd">+0.17</strong> <span>pp</span></p>
+                    <div class="scope-meter" aria-hidden="true"><span id="scope-kd-bar" style="width: 4.86%"></span></div>
+                  </div>
+                </div>
+                <p class="scope-performance-note">Mean gain in percentage points, as shown in Figure 4 below.</p>
+              </aside>
+            </div>
+            <div class="scope-explanation" aria-live="polite" aria-atomic="true">
+              <h5 class="scope-description-title">Router only</h5>
+              <p class="scope-description">Only router parameters are updated. Retained experts and shared model components remain frozen.</p>
+            </div>
+          </div>
+          <div class="columns is-variable is-5 results-figures">
+            <article class="column is-half">
+              <h4 class="title is-5">Overall strategy recovery</h4>
+              <figure class="paper-figure recovery-figure">
+                <a class="figure-zoom" href="./static/images/paper/strategy-recovery.webp" data-original="./static/paper/figures/strategy-recovery.png" data-title="Figure 1. Overall recovery gain of post-compression adjustment strategies." aria-label="Enlarge Figure 1: overall recovery gain">
+                  <img src="./static/images/paper/strategy-recovery.webp" width="2377" height="1659" loading="lazy" alt="Original paper Figure 1. Overall mean recovery gains of post-compression adjustment strategies; Full FT achieves the largest gain.">
+                  <span class="figure-zoom-hint" aria-hidden="true"><i class="fas fa-expand-alt"></i></span>
+                </a>
+                <figcaption><strong>Figure 1.</strong> Overall recovery gain over the unadjusted compressed baseline.
+                  Values average the studied backbone–compressor–retention settings and downstream benchmarks.
+                  <a href="./static/paper/figures/strategy-recovery.png" target="_blank" rel="noopener">Original figure ↗</a>
+                </figcaption>
+              </figure>
+            </article>
+            <article class="column is-half">
+              <h4 class="title is-5">Expanding the trainable scope</h4>
+              <figure class="paper-figure scope-figure">
+                <a class="figure-zoom" href="./static/images/paper/scope-progression.webp" data-original="./static/paper/figures/scope-progression.png" data-title="Figure 4. Recovery gain as the trainable parameter scope expands." aria-label="Enlarge Figure 4: trainable parameter scope">
+                  <img src="./static/images/paper/scope-progression.webp" width="2543" height="1434" loading="lazy" alt="Original paper Figure 4. Recovery gains for FT and KD increase from router-only through selected experts and all experts to full-parameter adjustment.">
+                  <span class="figure-zoom-hint" aria-hidden="true"><i class="fas fa-expand-alt"></i></span>
+                </a>
+                <figcaption><strong>Figure 4.</strong> Recovery gain as the trainable scope expands.
+                  LM fine-tuning and KD both improve with broader parameter updates.
+                  <a href="./static/paper/figures/scope-progression.png" target="_blank" rel="noopener">Original figure ↗</a>
+                </figcaption>
+              </figure>
+            </article>
+          </div>
+          <div class="content has-text-justified results-summary">
+            <p>
+              <strong>Broader updates yield greater aggregate recovery.</strong> Figure 1 compares the
+              adjustment strategies, while Figure 4 traces the effect of expanding the trainable scope.
+              Full FT achieves the largest mean gain of <strong>+3.49 percentage points</strong>, followed
+              by router + all experts FT (+2.31) and Full KD (+2.19). Under this small-budget protocol,
+              causal LM fine-tuning outperforms token-level KD at each matched scope.
+            </p>
+            <p>
+              Router-only adjustment can reweight available experts, but cannot directly change their
+              functions. Expert updates provide more ways to correct compression-induced errors.
+              The further gain from router + all experts FT to Full FT suggests that allowing shared
+              parameters to change also matters, consistent with errors propagating beyond the MoE modules.
+              These are aggregate results under the tested adjustment budget; individual settings can differ.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cost: switch among the three ORIGINAL panels of Figure 2. -->
+<section class="section subtle-band" id="cost">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Cost–Recovery Trade-off</h2>
+        <div class="content has-text-justified">
+          <p>
+            Full FT provides the largest aggregate recovery while using less measured GPU time, memory
+            occupancy, and energy than Full KD. Restricting adjustment to selected experts also incurs a
+            separate expert-selection pass, so fewer trainable parameters do not necessarily imply
+            lower adjustment cost.
+          </p>
+        </div>
+        <div class="cost-figure-panel">
+          <div class="tabs is-centered is-toggle is-toggle-rounded cost-tabs">
+            <div class="cost-tablist" role="tablist" aria-label="Figure 2 GPU cost metric">
+              <button class="button is-active" id="cost-time" type="button" role="tab" aria-selected="true" aria-controls="cost-panel" tabindex="0"
+                data-src="./static/images/paper/cost-recovery.webp"
+                data-original="./static/paper/figures/cost-recovery.pdf"
+                data-alt="Original paper Figure 2, top panel. Mean recovery gain versus effective GPU-hours."
+                data-caption="Effective GPU-hours (top panel).">
+                <span class="icon"><i class="far fa-clock" aria-hidden="true"></i></span><span>GPU time</span>
+              </button>
+              <button class="button" id="cost-memory" type="button" role="tab" aria-selected="false" aria-controls="cost-panel" tabindex="-1"
+                data-src="./static/images/paper/cost-memory.webp"
+                data-original="./static/paper/figures/cost-memory.pdf"
+                data-alt="Original paper Figure 2, middle panel. Mean recovery gain versus GPU-memory occupancy in GiB-hours."
+                data-caption="GPU-memory occupancy in GiB-hours (middle panel).">
+                <span class="icon"><i class="fas fa-memory" aria-hidden="true"></i></span><span>Memory</span>
+              </button>
+              <button class="button" id="cost-energy" type="button" role="tab" aria-selected="false" aria-controls="cost-panel" tabindex="-1"
+                data-src="./static/images/paper/cost-energy.webp"
+                data-original="./static/paper/figures/cost-energy.pdf"
+                data-alt="Original paper Figure 2, bottom panel. Mean recovery gain versus GPU energy usage in kWh."
+                data-caption="GPU energy usage in kWh (bottom panel).">
+                <span class="icon"><i class="fas fa-bolt" aria-hidden="true"></i></span><span>Energy</span>
+              </button>
+            </div>
+          </div>
+          <div id="cost-panel" role="tabpanel" aria-labelledby="cost-time" tabindex="0">
+            <figure class="paper-figure cost-figure">
+              <a class="figure-zoom" id="cost-zoom" href="./static/images/paper/cost-recovery.webp" data-original="./static/paper/figures/cost-recovery.pdf" data-title="Figure 2. GPU cost–performance trade-off." aria-label="Enlarge the selected Figure 2 panel">
+                <img id="cost-image" src="./static/images/paper/cost-recovery.webp" width="2332" height="1470" loading="lazy" alt="Original paper Figure 2, top panel. Mean recovery gain versus effective GPU-hours.">
+                <span class="figure-zoom-hint" aria-hidden="true"><i class="fas fa-expand-alt"></i></span>
+              </a>
+              <figcaption>
+                <strong>Figure 2.</strong> <span id="cost-caption">Effective GPU-hours (top panel).</span>
+                Mean recovery gain versus measured GPU cost; upper-left indicates higher recovery at lower cost.
+                Expert selection and online teacher passes are included when applicable.
+                <a id="cost-original" href="./static/paper/figures/cost-recovery.pdf" target="_blank" rel="noopener">Original figure (PDF) ↗</a>
+              </figcaption>
+            </figure>
+          </div>
+          <noscript><p class="figure-note">View the original <a href="./static/paper/figures/cost-memory.pdf">memory</a> and <a href="./static/paper/figures/cost-energy.pdf">energy</a> panels. Enable JavaScript to switch panels here.</p></noscript>
+        </div>
+        <p class="figure-note">
+          Effective GPU-hours are utilization-weighted time; GiB-hours measure time-integrated memory occupancy.
+          Compression, model loading, and benchmark evaluation are excluded. Full FT leads in aggregate
+          under the measured protocol; it is not the cheapest strategy or the strongest in every individual setting.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Original benchmark-family figure, replacing the custom bar chart. -->
+<section class="section section-divider" id="families">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Benchmark-Family Recovery</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recovery is not uniform across benchmark families. Full FT recovers most strongly on
+            <strong>chain-of-thought reasoning and multiple-choice QA</strong>, followed by general
+            reasoning and QA. Mathematics changes only modestly, and coding decreases slightly.
+          </p>
+        </div>
+        <figure class="paper-figure">
+          <a class="figure-zoom" href="./static/images/paper/benchmark-families.webp" data-original="./static/paper/figures/benchmark-families.pdf" data-title="Figure 3. Benchmark-family recovery of Full FT." aria-label="Enlarge Figure 3: benchmark-family recovery">
+            <img src="./static/images/paper/benchmark-families.webp" width="2445" height="1377" loading="lazy" alt="Original paper Figure 3. Full FT performance by family, with original and compressed score references. Gains are largest for CoT and MCQA; coding is slightly lower.">
+            <span class="figure-zoom-hint" aria-hidden="true"><i class="fas fa-expand-alt"></i></span>
+          </a>
+          <figcaption><strong>Figure 3.</strong> Benchmark-family recovery of Full FT.
+            Bars show adjusted scores; dashed lines show the original model and the compressed baseline.
+            <a href="./static/paper/figures/benchmark-families.pdf" target="_blank" rel="noopener">Original figure (PDF) ↗</a>
+          </figcaption>
+        </figure>
+        <p class="figure-note">
+          The result suggests that a short general-domain LM adjustment is especially useful for
+          recovering general generation and reasoning behavior. Specialized domains may require
+          task-specific data or longer adaptation.
+        </p>
+        <section class="qualitative-examples" id="qualitative-examples" aria-labelledby="qualitative-title">
+          <h3 class="title is-4" id="qualitative-title">Qualitative Examples: Before and After Adjustment</h3>
+          <div class="content has-text-justified qualitative-intro">
+            <p>
+              The family-level results show that Full FT helps <strong>chain-of-thought reasoning and
+              multiple-choice QA</strong> most, followed by general reasoning and QA. The paired responses
+              below add a generation-level view: can the compressed model sustain a natural-language
+              answer without collapsing into repeated tokens? They complement the aggregate scores with
+              concrete examples from both expert pruning and expert merging.
+            </p>
+            <p>
+              Across both pruning and merging, Full FT reduces repetition and restores more fluent continuations.
+            </p>
+          </div>
+
+          <article class="example-case" aria-labelledby="example-one-title">
+            <h4 class="title is-5" id="example-one-title">Example 1 · Expert Pruning</h4>
+            <p class="example-meta">Gemma4 · AIMER · 50% expert retention</p>
+            <p class="example-prompt"><strong>Prompt:</strong> what are forces (gravity, magnetism) made of?</p>
+            <div class="generation-pair columns">
+              <div class="generation-before column">
+                <h5>Compressed model before Full FT</h5>
+                <blockquote class="generation-output">
+                  <p>Imagine you are playing in a playground. You see a ball rolling
+                    <mark>down down down down down down down down down down
+                    down down down down down down down down down down
+                    down down down down down down down down down down
+                    down down down down down down down down down down</mark> …</p>
+                </blockquote>
+              </div>
+              <div class="generation-after column">
+                <h5>After Full FT</h5>
+                <blockquote class="generation-output">
+                  <p>Imagine you are playing in a playground with a big, heavy ball. If you throw that ball down,
+                    it does not just go away and disappear. It stays in the ground, and if you throw it up, it
+                    stays in the sky. It does not just float on its own; it stays there because it is “stuck” to
+                    the ground or the sky. That “stickiness” is what we call gravity. … When we talk about
+                    forces like gravity or magnetism, we are talking about the rules of the universe. These
+                    rules are made of the way things are connected.</p>
+                </blockquote>
+              </div>
+            </div>
+          </article>
+
+          <article class="example-case" aria-labelledby="example-two-title">
+            <h4 class="title is-5" id="example-two-title">Example 2 · Expert Merging</h4>
+            <p class="example-meta">Qwen3 · HC-SMoE · 62.5% expert retention</p>
+            <p class="example-prompt"><strong>Prompt:</strong> How do overlays in NFL look so real? Like paint? How are they so accurate?</p>
+            <div class="generation-pair columns">
+              <div class="generation-before column">
+                <h5>Compressed model before Full FT</h5>
+                <blockquote class="generation-output">
+                  <p>Okay, let us talk about this like you are a kid who is just learning how to talk. So imagine
+                    you are watching a video of a football game, and you see this thing called an “overlay.”
+                    It looks like a flat layer of color that just sits on the ground, like paint. But here is
+                    the cool part: even though it looks like paint, it is not really paint at all. It is not
+                    like paint that you can touch or that you can walk on and it will
+                    <mark>fl fl fl fl fl fl fl fl fl fl fl fl fl fl fl</mark> …</p>
+                </blockquote>
+              </div>
+              <div class="generation-after column">
+                <h5>After Full FT</h5>
+                <blockquote class="generation-output">
+                  <p>Okay, imagine you are playing football and you are on the field. You are running, jumping,
+                    dodging, and suddenly you see these bright lines and colors that look like paint on the
+                    grass. They are not just lines; they are little signs that show where the ball is going
+                    and where the players are. … Instead, they use a digital overlay technology. The
+                    computer knows exactly where every player is, where the ball is, and where the field
+                    lines are, so it draws the graphics in real time and makes them look as if they belong
+                    to the field.</p>
+                </blockquote>
+              </div>
+            </div>
+          </article>
+
+          <p class="example-note">Highlighted fragments mark repetition in the compressed model’s response.
+            Ellipses indicate omitted text.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Calibration-budget and domain robustness, compared in a single two-column section. -->
+<section class="section subtle-band" id="robustness">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Robustness to Calibration Budget and Domain</h2>
+        <div class="content has-text-justified">
+          <p>
+            We examine whether the aggregate strategy trend persists when the adjustment data change:
+            a smaller C4 budget, and a shift from C4 to OpenR1-Math-220k. Both checks retain the
+            one-epoch adjustment procedure and the same downstream evaluation suite.
+          </p>
+        </div>
+        <div class="columns is-variable is-5 robustness-figures">
+          <article class="column is-half">
+            <h3 class="title is-5">A smaller calibration budget</h3>
+            <p class="robustness-setting">3,000 → 1,024 C4 examples</p>
+            <figure class="paper-figure">
+            <a class="figure-zoom" href="./static/images/paper/small-budget.webp" data-original="./static/paper/figures/small-budget.pdf" data-title="Figure 5. Recovery under a 1,024-example C4 adjustment budget." aria-label="Enlarge Figure 5: smaller calibration budget">
+              <img src="./static/images/paper/small-budget.webp" width="2288" height="1594" loading="lazy" alt="Original paper Figure 5. Strategy recovery gains under a 1,024-example C4 budget. Full FT remains the leading aggregate strategy.">
+              <span class="figure-zoom-hint" aria-hidden="true"><i class="fas fa-expand-alt"></i></span>
+            </a>
+            <figcaption><strong>Figure 5.</strong> Mean recovery gain under a 1,024-example C4 budget.
+              The one-epoch adjustment and downstream evaluation protocol are retained.
+              <a href="./static/paper/figures/small-budget.pdf" target="_blank" rel="noopener">Original figure (PDF) ↗</a>
+            </figcaption>
+          </figure>
+          </article>
+          <article class="column is-half">
+            <h3 class="title is-5">A different calibration domain</h3>
+            <p class="robustness-setting">C4 → OpenR1-Math · 1,024 examples each</p>
+            <figure class="paper-figure">
+            <a class="figure-zoom" href="./static/images/paper/domain-robustness.webp" data-original="./static/paper/figures/domain-robustness.pdf" data-title="Figure 6. Calibration-domain consistency with 1,024 examples." aria-label="Enlarge Figure 6: calibration-domain consistency">
+              <img src="./static/images/paper/domain-robustness.webp" width="2330" height="1470" loading="lazy" alt="Original paper Figure 6. Strategy-level recovery under C4 versus OpenR1-Math calibration. The aggregate rankings remain strongly associated.">
+              <span class="figure-zoom-hint" aria-hidden="true"><i class="fas fa-expand-alt"></i></span>
+            </a>
+            <figcaption><strong>Figure 6.</strong> Recovery under C4 and OpenR1-Math calibration at the
+              same 1,024-example budget. Upper-right indicates stronger recovery in both domains.
+              <a href="./static/paper/figures/domain-robustness.pdf" target="_blank" rel="noopener">Original figure (PDF) ↗</a>
+            </figcaption>
+          </figure>
+          </article>
+        </div>
+        <div class="content has-text-justified robustness-summary">
+          <p>
+            <strong>The leading aggregate pattern persists under both checks.</strong>
+            With 1,024 C4 examples, Full FT gives the largest mean recovery
+            (+2.78 percentage points), followed by router + all experts FT (+1.86) and Full KD (+1.77).
+            Across calibration domains, the strategy rankings remain strongly associated
+            (Spearman <em>ρ</em> = 0.973; Kendall <em>τ</em><sub>b</sub> = 0.897), and
+            Full FT has the largest recovery averaged across the two domains.
+          </p>
+          <p class="figure-note">
+            The domain comparison uses six matched settings. This supports an aggregate trend,
+            not an invariant ranking for every checkpoint: setting-level Spearman correlations range
+            from 0.071 to 0.962.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section interpretation-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Scope of the findings</h2>
+        <p>
+          The main conclusions concern small-budget, general-domain adjustment of the tested pruning
+          and merging checkpoints under a unified implementation. Larger models, different training
+          data or schedules, and system-level optimizations may change the trade-off. Expert Editing is
+          reported separately as supplementary compatibility-mode evidence. PCA is an efficiency and
+          capability-recovery stage; the study does not claim improved safety or factual reliability.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BibTeX: original template structure with a small copy enhancement. -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <div class="citation-heading">
+      <h2 class="title is-3">BibTeX</h2>
+      <button class="button is-small is-rounded" id="copy-bibtex" type="button">
+        <span class="icon"><i class="far fa-copy" aria-hidden="true"></i></span><span class="copy-label">Copy</span>
+      </button>
+    </div>
+    <pre><code id="bibtex-code">@inproceedings{hyeon2026beyond,
+  title = {Beyond Retraining-Free {MoE} Compression:
+           A Cost-Normalized Study of Post-Compression Adjustment},
+  author = {Hyeon, Sieun and Do, Jaeyoung},
+  booktitle = {Proceedings of the 2026 Conference on
+               Empirical Methods in Natural Language Processing},
+  year = {2026}
+}</code></pre>
+    <p id="copy-status" class="copy-status" role="status"></p>
+  </div>
+</section>
+</main>
+
+<!-- Footer (Don't change) -->
+<footer class="footer" style="padding-bottom: 40px;">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <a href="https://en.snu.ac.kr">
+            <img src="./static/images/snu_logo.png" alt="Logo" style="max-height: 48px; margin: 6px 10px;">
+          </a>
+          <a href="https://aidas.snu.ac.kr">
+            <img src="./static/images/aidaslab_logo.png" alt="Logo" style="max-height: 36px; margin: 10px 30px;">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<dialog id="figure-dialog" aria-labelledby="dialog-title">
+  <div class="dialog-heading">
+    <h2 id="dialog-title" class="title is-5">Paper figure</h2>
+    <button class="delete is-large dialog-close" type="button" aria-label="Close figure"></button>
+  </div>
+  <img id="dialog-image" alt="">
+  <a id="dialog-original" href="./static/paper/paper.pdf" target="_blank" rel="noopener">Open original figure ↗</a>
+</dialog>
+</body>
+</html>
