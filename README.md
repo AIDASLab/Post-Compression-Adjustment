@@ -104,10 +104,13 @@ lm-evaluation-harness checkout are not vendored.
 ## Citation
 
 ```bibtex
-@inproceedings{hyeon2026beyond,
-  title     = {Beyond Retraining-Free {MoE} Compression: A Cost-Normalized Study of Post-Compression Adjustment},
-  author    = {Sieun Hyeon and Jaeyoung Do},
-  booktitle = {Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing},
-  year      = {2026}
+@misc{hyeon2026beyond,
+      title={Beyond Retraining-Free MoE Compression: A Cost-Normalized Study of Post-Compression Adjustment}, 
+      author={Sieun Hyeon and Jaeyoung Do},
+      year={2026},
+      eprint={2609.06076},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2609.06076}, 
 }
 ```
