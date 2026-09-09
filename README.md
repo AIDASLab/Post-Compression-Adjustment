@@ -1,7 +1,7 @@
 # Beyond Retraining-Free MoE Compression: A Cost-Normalized Study of Post-Compression Adjustment
 <h3 align="center">EMNLP 2026 Main Conference</h3>
 <p align="center">
-  <a href="https://arxiv.org/abs/2609.0000000"><img src="https://img.shields.io/badge/arXiv-2609.0000000-b31b1b.svg" alt="arXiv"></a>
+  <a href="https://arxiv.org/abs/2609.06076"><img src="https://img.shields.io/badge/arXiv-2609.06076-b31b1b.svg" alt="arXiv"></a>
   <a href="https://aidaslab.github.io/Post-Compression-Adjustment/"><img src="https://img.shields.io/badge/Project-Page-blue.svg" alt="Project Page"></a>
 </p>
 
